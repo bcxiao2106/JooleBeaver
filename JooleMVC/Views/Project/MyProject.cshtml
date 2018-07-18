@@ -1,0 +1,191 @@
+﻿@model JooleMVC.Models.ProjectListVM
+@using JooleMVC.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Project List</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .th {
+            background-color: #e9ecef;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0px;
+            border: 0px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background: linear-gradient(to bottom, #7AB5EE 8%, #ffffff 15%);*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        <div id="page_header" class="row" style="background: linear-gradient(to bottom, #7AB5EE 25%, #e9ecef 80%);height:65px;">
+            <div class="col-2" style="margin-top:10px;"><img src="~/Content/Images/joole_logo_color.png" width="125" height="50" /></div>
+
+            <div class="col-8">
+                <div class="col-12 text-center">
+                    <select id="select_Category" name="Category" class="form-control form-control-sm col-2" style="display:inline-block;margin-top:20px;" required>
+                        <option value="-1">Category</option>
+                    </select>
+                    <input id="txt_Search_Keyword" name="Search_Keyword" class="form-control form-control-sm col-5" style="display:inline-block;margin-top:20px;" type="text" placeholder="keyword" maxlength="50" />
+                    <input id="SubmitBtn" type="submit" value="Search" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </div>
+            </div>
+            <div class="col-2 text-center">
+                <a href="/Project/ListProjectAsync" class="badge badge-pill badge-light text-muted" style="display:inline-block;margin-top:25px;">Project</a>
+                <img id="BinaryImg" src="" width="55" height="55" style="border-radius:50%;" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:0px;">
+            <ol class="breadcrumb small col-lg-12">
+                <li class="breadcrumb-item"><a href="#">@Session["UserName"].ToString()</a></li>
+                <li class="breadcrumb-item"><a href="#">Project List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">All</li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <input type="button" id="btn_NewProject" name="btn_NewProject" value="+ New Project" style="font-size:12px;" />
+            </div>
+            <div class="col-12" style="margin-top:10px;">
+                <table class="table table-sm table-striped" style="font-size:12px">
+                    <tr style="background-color:#7AB5EE;">
+                        <th>Project ID</th>
+                        <th>Project Name</th>
+                        <th>Project Address1</th>
+                        <th>Project Address2</th>
+                        <th>Project City</th>
+                        <th>Project State</th>
+                        <th>Project Size</th>
+                        <th>Client Name</th>
+                    </tr>
+                    @{
+            foreach (Project p in Model.Projects)
+            {
+                <tr>
+                    <td>@p.Project_ID</td>
+                    <td>@p.Project_Name</td>
+                    <td>@p.Project_Address1</td>
+                    <td>@p.Project_Address2</td>
+                    <td>@p.Project_City</td>
+                    <td>@p.Project_State</td>
+                    <td>@p.Project_Size</td>
+                    <td>@p.Client_Name</td>
+                </tr>
+}
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#btn_NewProject").click(function () {
+                window.location.href = "http://localhost:56994/Project/Create";
+            });
+
+            $("#SubmitBtn").onclick = function () {
+                if ($("#txt_Search_Keyword").val() == "HVAC Fans") {
+                    window.location = "http://localhost:56994/ProductList/GetProductListJson?SubCategory_ID=" + "1";
+                }
+                else { alert("No data of this subcategory"); }
+            };
+
+            $("#select_Category").change(function () {
+                $("#txt_Search_Keyword").val("");
+            });
+
+            $("#txt_Search_Keyword").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: "http://localhost:57022/WebAPI/GetSubCateById",
+                        data: {
+                            CateID: $("#select_Category").val(),
+                            keyword: $("#txt_Search_Keyword").val()
+                        },
+                        //data: "{CateID:'" + $("#select_Category").val() + "', keyword: '" + $("#txt_Search_Keyword").val() + "'}",
+                        dataType: "json",
+                        async: true,
+                        success: function (data) {
+                            //var myJSON = JSON.stringify(data);
+                            //alert(myJSON);
+                            response(data);
+                        },
+                        error: function (result) {
+                        }
+                    });
+                },
+                minLength: 1,
+                delay: 500
+            });
+
+            document.getElementById("SubmitBtn").onclick = function () {
+                if ($("#txt_Search_Keyword").val() == "HVAC Fans") {
+                    window.location = "http://localhost:56994/ProductList/GetProductListJson?SubCategory_ID=" + "1";
+                }
+                else { alert("No data of this subcategory"); }
+            };
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetCategoryList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    //var myJSON = JSON.stringify(data);
+                    //alert(myJSON);
+                    var OptionList = "";
+                    $('#select_Category').html('');
+                    $.each(data, function (i, item) {
+                        OptionList += "<option value='" + item.Category_ID + "'>" + item.Category_Name + "</option>";
+                    });
+                    $('#select_Category').append(OptionList);
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+
+            $.ajax({
+                url: "http://localhost:57022/WebAPI/GetUserImageByID?UserID="+@Session["UserID"].ToString(),
+                type: "GET",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var imageDataString = JSON.stringify(data);
+                    imageDataString = imageDataString.substring(1, imageDataString.length - 1);
+                    imageDataString = "data:image;base64," + imageDataString;
+                    $("#BinaryImg").attr("src", imageDataString);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

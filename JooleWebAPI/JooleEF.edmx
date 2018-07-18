@@ -1,0 +1,1369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="jooleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCredential">
+          <Key>
+            <PropertyRef Name="Credential_ID" />
+          </Key>
+          <Property Name="Credential_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Type" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDepartment">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Manufacturer_ID" Type="int" Nullable="false" />
+          <Property Name="Department_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Document_Folder_Path" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFeedBack">
+          <Key>
+            <PropertyRef Name="FeedBack_ID" />
+          </Key>
+          <Property Name="FeedBack_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Feedback_Time" Type="datetime" Nullable="false" />
+          <Property Name="Feedback_Score" Type="tinyint" Nullable="false" />
+          <Property Name="Feedback_Content" Type="varchar" MaxLength="225" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblManufacturer">
+          <Key>
+            <PropertyRef Name="Manufacturer_ID" />
+          </Key>
+          <Property Name="Manufacturer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Manufacturer_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Manufacturer_Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Manufacturer_Web" Type="varchar" MaxLength="3000" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Manufacturer_ID" Type="int" Nullable="false" />
+          <Property Name="Sales_ID" Type="int" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="int" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Series" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model_Year" Type="int" Nullable="false" />
+          <Property Name="Series_Info" Type="varchar" MaxLength="100" />
+          <Property Name="Document_ID" Type="int" Nullable="false" />
+          <Property Name="Featured" Type="varchar" MaxLength="100" />
+          <Property Name="Product_Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblProject">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Project_Address1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Project_Address2" Type="varchar" MaxLength="100" />
+          <Property Name="Project_City" Type="int" Nullable="false" />
+          <Property Name="Project_State" Type="int" Nullable="false" />
+          <Property Name="Project_Size" Type="int" Nullable="false" />
+          <Property Name="Client_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProjToProd">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProperty">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Property_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsType" Type="bit" Nullable="false" />
+          <Property Name="IsTechSpec" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPropertyValue">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblSales">
+          <Key>
+            <PropertyRef Name="Sales_ID" />
+          </Key>
+          <Property Name="Sales_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sales_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sales_Phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sales_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sales_Web" Type="varchar" MaxLength="3000" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblSubCategory">
+          <Key>
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="SubCategory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_ID" Type="int" Nullable="false" />
+          <Property Name="SubCategory_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTechSpecFilter">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="int" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="int" Nullable="false" />
+          <Property Name="Min_Value" Type="int" Nullable="false" />
+          <Property Name="Max_Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTypeFilter">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="int" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="int" Nullable="false" />
+          <Property Name="Type_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type_Options" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Image" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="User_Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Credential_ID" Type="int" Nullable="false" />
+          <Property Name="User_Image_SRC" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_tblCity_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+          <End Role="tblCity" Type="Self.tblCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="tblCity">
+              <PropertyRef Name="State_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDepartment_tblManufacturer">
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="1" />
+          <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManufacturer">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Principal>
+            <Dependent Role="tblDepartment">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFeedBack_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblFeedBack" Type="Self.tblFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblFeedBack">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFeedBack_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFeedBack" Type="Self.tblFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblFeedBack">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblManufacturer_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblManufacturer">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblDocument">
+          <End Role="tblDocument" Type="Self.tblDocument" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDocument">
+              <PropertyRef Name="Document_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Document_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblManufacturer">
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManufacturer">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProjToProd">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblProjToProd" Type="Self.tblProjToProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblProjToProd">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblPropertyValue">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblPropertyValue" Type="Self.tblPropertyValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblPropertyValue">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblSales">
+          <End Role="tblSales" Type="Self.tblSales" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSales">
+              <PropertyRef Name="Sales_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Sales_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblSubCategory">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblCity">
+          <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCity">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="Project_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblProjToProd">
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="1" />
+          <End Role="tblProjToProd" Type="Self.tblProjToProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProject">
+              <PropertyRef Name="Project_ID" />
+            </Principal>
+            <Dependent Role="tblProjToProd">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="Project_State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProperty_tblTechSpecFilter">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblTechSpecFilter" Type="Self.tblTechSpecFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblTechSpecFilter">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProperty_tblTypeFilter">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblTypeFilter" Type="Self.tblTypeFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblTypeFilter">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPropertyValue_tblProperty">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblPropertyValue" Type="Self.tblPropertyValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblPropertyValue">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSubCategory_tblCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="tblSubCategory">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSubCategory_tblTechSpecFilter">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblTechSpecFilter" Type="Self.tblTechSpecFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblTechSpecFilter">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSubCategory_tblTypeFilter">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblTypeFilter" Type="Self.tblTypeFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblTypeFilter">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblCredential">
+          <End Role="tblCredential" Type="Self.tblCredential" Multiplicity="1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCredential">
+              <PropertyRef Name="Credential_ID" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="Credential_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jooleModelStoreContainer">
+          <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCity" EntityType="Self.tblCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCredential" EntityType="Self.tblCredential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDocument" EntityType="Self.tblDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFeedBack" EntityType="Self.tblFeedBack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManufacturer" EntityType="Self.tblManufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjToProd" EntityType="Self.tblProjToProd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProperty" EntityType="Self.tblProperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPropertyValue" EntityType="Self.tblPropertyValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSales" EntityType="Self.tblSales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSubCategory" EntityType="Self.tblSubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTechSpecFilter" EntityType="Self.tblTechSpecFilter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTypeFilter" EntityType="Self.tblTypeFilter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblCity_tblState" Association="Self.FK_tblCity_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="tblCity" EntitySet="tblCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDepartment_tblManufacturer" Association="Self.FK_tblDepartment_tblManufacturer">
+            <End Role="tblManufacturer" EntitySet="tblManufacturer" />
+            <End Role="tblDepartment" EntitySet="tblDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFeedBack_tblProduct" Association="Self.FK_tblFeedBack_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblFeedBack" EntitySet="tblFeedBack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFeedBack_tblUser" Association="Self.FK_tblFeedBack_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblFeedBack" EntitySet="tblFeedBack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblManufacturer_tblUser" Association="Self.FK_tblManufacturer_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblManufacturer" EntitySet="tblManufacturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblDocument" Association="Self.FK_tblProduct_tblDocument">
+            <End Role="tblDocument" EntitySet="tblDocument" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblManufacturer" Association="Self.FK_tblProduct_tblManufacturer">
+            <End Role="tblManufacturer" EntitySet="tblManufacturer" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProjToProd" Association="Self.FK_tblProduct_tblProjToProd">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblProjToProd" EntitySet="tblProjToProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblPropertyValue" Association="Self.FK_tblProduct_tblPropertyValue">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblPropertyValue" EntitySet="tblPropertyValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblSales" Association="Self.FK_tblProduct_tblSales">
+            <End Role="tblSales" EntitySet="tblSales" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblSubCategory" Association="Self.FK_tblProduct_tblSubCategory">
+            <End Role="tblSubCategory" EntitySet="tblSubCategory" />
+            <End Role="tblProduct" EntitySet="tblProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblCity" Association="Self.FK_tblProject_tblCity">
+            <End Role="tblCity" EntitySet="tblCity" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblProjToProd" Association="Self.FK_tblProject_tblProjToProd">
+            <End Role="tblProject" EntitySet="tblProject" />
+            <End Role="tblProjToProd" EntitySet="tblProjToProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblState" Association="Self.FK_tblProject_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblUser" Association="Self.FK_tblProject_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProperty_tblTechSpecFilter" Association="Self.FK_tblProperty_tblTechSpecFilter">
+            <End Role="tblProperty" EntitySet="tblProperty" />
+            <End Role="tblTechSpecFilter" EntitySet="tblTechSpecFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProperty_tblTypeFilter" Association="Self.FK_tblProperty_tblTypeFilter">
+            <End Role="tblProperty" EntitySet="tblProperty" />
+            <End Role="tblTypeFilter" EntitySet="tblTypeFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPropertyValue_tblProperty" Association="Self.FK_tblPropertyValue_tblProperty">
+            <End Role="tblProperty" EntitySet="tblProperty" />
+            <End Role="tblPropertyValue" EntitySet="tblPropertyValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSubCategory_tblCategory" Association="Self.FK_tblSubCategory_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategory" />
+            <End Role="tblSubCategory" EntitySet="tblSubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSubCategory_tblTechSpecFilter" Association="Self.FK_tblSubCategory_tblTechSpecFilter">
+            <End Role="tblSubCategory" EntitySet="tblSubCategory" />
+            <End Role="tblTechSpecFilter" EntitySet="tblTechSpecFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSubCategory_tblTypeFilter" Association="Self.FK_tblSubCategory_tblTypeFilter">
+            <End Role="tblSubCategory" EntitySet="tblSubCategory" />
+            <End Role="tblTypeFilter" EntitySet="tblTypeFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblCredential" Association="Self.FK_tblUser_tblCredential">
+            <End Role="tblCredential" EntitySet="tblCredential" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="jooleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblSubCategories" Relationship="Self.FK_tblSubCategory_tblCategory" FromRole="tblCategory" ToRole="tblSubCategory" />
+        </EntityType>
+        <EntityType Name="tblCity">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblState" Relationship="Self.FK_tblCity_tblState" FromRole="tblCity" ToRole="tblState" />
+          <NavigationProperty Name="tblProjects" Relationship="Self.FK_tblProject_tblCity" FromRole="tblCity" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblCredential">
+          <Key>
+            <PropertyRef Name="Credential_ID" />
+          </Key>
+          <Property Name="Credential_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblCredential" FromRole="tblCredential" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblDepartment">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufacturer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Department_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Department_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblManufacturer" Relationship="Self.FK_tblDepartment_tblManufacturer" FromRole="tblDepartment" ToRole="tblManufacturer" />
+        </EntityType>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Document_Folder_Path" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblProducts" Relationship="Self.FK_tblProduct_tblDocument" FromRole="tblDocument" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblFeedBack">
+          <Key>
+            <PropertyRef Name="FeedBack_ID" />
+          </Key>
+          <Property Name="FeedBack_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Feedback_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Feedback_Score" Type="Byte" Nullable="false" />
+          <Property Name="Feedback_Content" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK_tblFeedBack_tblProduct" FromRole="tblFeedBack" ToRole="tblProduct" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblFeedBack_tblUser" FromRole="tblFeedBack" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblManufacturer">
+          <Key>
+            <PropertyRef Name="Manufacturer_ID" />
+          </Key>
+          <Property Name="Manufacturer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufacturer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Manufacturer_Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Manufacturer_Web" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblDepartments" Relationship="Self.FK_tblDepartment_tblManufacturer" FromRole="tblManufacturer" ToRole="tblDepartment" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblManufacturer_tblUser" FromRole="tblManufacturer" ToRole="tblUser" />
+          <NavigationProperty Name="tblProducts" Relationship="Self.FK_tblProduct_tblManufacturer" FromRole="tblManufacturer" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblProduct">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufacturer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sales_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Series" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model_Year" Type="Int32" Nullable="false" />
+          <Property Name="Series_Info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Document_ID" Type="Int32" Nullable="false" />
+          <Property Name="Featured" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Product_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblDocument" Relationship="Self.FK_tblProduct_tblDocument" FromRole="tblProduct" ToRole="tblDocument" />
+          <NavigationProperty Name="tblFeedBacks" Relationship="Self.FK_tblFeedBack_tblProduct" FromRole="tblProduct" ToRole="tblFeedBack" />
+          <NavigationProperty Name="tblManufacturer" Relationship="Self.FK_tblProduct_tblManufacturer" FromRole="tblProduct" ToRole="tblManufacturer" />
+          <NavigationProperty Name="tblProjToProds" Relationship="Self.FK_tblProduct_tblProjToProd" FromRole="tblProduct" ToRole="tblProjToProd" />
+          <NavigationProperty Name="tblPropertyValues" Relationship="Self.FK_tblProduct_tblPropertyValue" FromRole="tblProduct" ToRole="tblPropertyValue" />
+          <NavigationProperty Name="tblSale" Relationship="Self.FK_tblProduct_tblSales" FromRole="tblProduct" ToRole="tblSales" />
+          <NavigationProperty Name="tblSubCategory" Relationship="Self.FK_tblProduct_tblSubCategory" FromRole="tblProduct" ToRole="tblSubCategory" />
+        </EntityType>
+        <EntityType Name="tblProject">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Project_Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Project_City" Type="Int32" Nullable="false" />
+          <Property Name="Project_State" Type="Int32" Nullable="false" />
+          <Property Name="Project_Size" Type="Int32" Nullable="false" />
+          <Property Name="Client_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblCity" Relationship="Self.FK_tblProject_tblCity" FromRole="tblProject" ToRole="tblCity" />
+          <NavigationProperty Name="tblProjToProds" Relationship="Self.FK_tblProject_tblProjToProd" FromRole="tblProject" ToRole="tblProjToProd" />
+          <NavigationProperty Name="tblState" Relationship="Self.FK_tblProject_tblState" FromRole="tblProject" ToRole="tblState" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblProject_tblUser" FromRole="tblProject" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblProjToProd">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK_tblProduct_tblProjToProd" FromRole="tblProjToProd" ToRole="tblProduct" />
+          <NavigationProperty Name="tblProject" Relationship="Self.FK_tblProject_tblProjToProd" FromRole="tblProjToProd" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblProperty">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Property_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsType" Type="Boolean" Nullable="false" />
+          <Property Name="IsTechSpec" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblTechSpecFilters" Relationship="Self.FK_tblProperty_tblTechSpecFilter" FromRole="tblProperty" ToRole="tblTechSpecFilter" />
+          <NavigationProperty Name="tblTypeFilters" Relationship="Self.FK_tblProperty_tblTypeFilter" FromRole="tblProperty" ToRole="tblTypeFilter" />
+          <NavigationProperty Name="tblPropertyValues" Relationship="Self.FK_tblPropertyValue_tblProperty" FromRole="tblProperty" ToRole="tblPropertyValue" />
+        </EntityType>
+        <EntityType Name="tblPropertyValue">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK_tblProduct_tblPropertyValue" FromRole="tblPropertyValue" ToRole="tblProduct" />
+          <NavigationProperty Name="tblProperty" Relationship="Self.FK_tblPropertyValue_tblProperty" FromRole="tblPropertyValue" ToRole="tblProperty" />
+        </EntityType>
+        <EntityType Name="tblSale">
+          <Key>
+            <PropertyRef Name="Sales_ID" />
+          </Key>
+          <Property Name="Sales_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sales_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sales_Web" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblProducts" Relationship="Self.FK_tblProduct_tblSales" FromRole="tblSales" ToRole="tblProduct" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblCities" Relationship="Self.FK_tblCity_tblState" FromRole="tblState" ToRole="tblCity" />
+          <NavigationProperty Name="tblProjects" Relationship="Self.FK_tblProject_tblState" FromRole="tblState" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblSubCategory">
+          <Key>
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblCategory" Relationship="Self.FK_tblSubCategory_tblCategory" FromRole="tblSubCategory" ToRole="tblCategory" />
+          <NavigationProperty Name="tblProducts" Relationship="Self.FK_tblProduct_tblSubCategory" FromRole="tblSubCategory" ToRole="tblProduct" />
+          <NavigationProperty Name="tblTechSpecFilters" Relationship="Self.FK_tblSubCategory_tblTechSpecFilter" FromRole="tblSubCategory" ToRole="tblTechSpecFilter" />
+          <NavigationProperty Name="tblTypeFilters" Relationship="Self.FK_tblSubCategory_tblTypeFilter" FromRole="tblSubCategory" ToRole="tblTypeFilter" />
+        </EntityType>
+        <EntityType Name="tblTechSpecFilter">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+          <Property Name="Min_Value" Type="Int32" Nullable="false" />
+          <Property Name="Max_Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblProperty" Relationship="Self.FK_tblProperty_tblTechSpecFilter" FromRole="tblTechSpecFilter" ToRole="tblProperty" />
+          <NavigationProperty Name="tblSubCategory" Relationship="Self.FK_tblSubCategory_tblTechSpecFilter" FromRole="tblTechSpecFilter" ToRole="tblSubCategory" />
+        </EntityType>
+        <EntityType Name="tblTypeFilter">
+          <Key>
+            <PropertyRef Name="Property_ID" />
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="Property_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type_Options" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblProperty" Relationship="Self.FK_tblProperty_tblTypeFilter" FromRole="tblTypeFilter" ToRole="tblProperty" />
+          <NavigationProperty Name="tblSubCategory" Relationship="Self.FK_tblSubCategory_tblTypeFilter" FromRole="tblTypeFilter" ToRole="tblSubCategory" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Image" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Credential_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Image_SRC" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblCredential" Relationship="Self.FK_tblUser_tblCredential" FromRole="tblUser" ToRole="tblCredential" />
+          <NavigationProperty Name="tblFeedBacks" Relationship="Self.FK_tblFeedBack_tblUser" FromRole="tblUser" ToRole="tblFeedBack" />
+          <NavigationProperty Name="tblManufacturers" Relationship="Self.FK_tblManufacturer_tblUser" FromRole="tblUser" ToRole="tblManufacturer" />
+          <NavigationProperty Name="tblProjects" Relationship="Self.FK_tblProject_tblUser" FromRole="tblUser" ToRole="tblProject" />
+        </EntityType>
+        <Association Name="FK_tblSubCategory_tblCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="tblSubCategory">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCity_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+          <End Role="tblCity" Type="Self.tblCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="tblCity">
+              <PropertyRef Name="State_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblCity">
+          <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCity">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="Project_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblCredential">
+          <End Role="tblCredential" Type="Self.tblCredential" Multiplicity="1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCredential">
+              <PropertyRef Name="Credential_ID" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="Credential_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblDepartment_tblManufacturer">
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="1" />
+          <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManufacturer">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Principal>
+            <Dependent Role="tblDepartment">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblDocument">
+          <End Role="tblDocument" Type="Self.tblDocument" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDocument">
+              <PropertyRef Name="Document_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Document_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFeedBack_tblProduct">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblFeedBack" Type="Self.tblFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblFeedBack">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFeedBack_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFeedBack" Type="Self.tblFeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblFeedBack">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblManufacturer_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblManufacturer">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblManufacturer">
+          <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManufacturer">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Manufacturer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProjToProd">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblProjToProd" Type="Self.tblProjToProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblProjToProd">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblPropertyValue">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblPropertyValue" Type="Self.tblPropertyValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="tblPropertyValue">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblSales">
+          <End Role="tblSales" Type="Self.tblSale" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSales">
+              <PropertyRef Name="Sales_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="Sales_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblSubCategory">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblProduct">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblProjToProd">
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="1" />
+          <End Role="tblProjToProd" Type="Self.tblProjToProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProject">
+              <PropertyRef Name="Project_ID" />
+            </Principal>
+            <Dependent Role="tblProjToProd">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="Project_State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProperty_tblTechSpecFilter">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblTechSpecFilter" Type="Self.tblTechSpecFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblTechSpecFilter">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProperty_tblTypeFilter">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblTypeFilter" Type="Self.tblTypeFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblTypeFilter">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPropertyValue_tblProperty">
+          <End Role="tblProperty" Type="Self.tblProperty" Multiplicity="1" />
+          <End Role="tblPropertyValue" Type="Self.tblPropertyValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProperty">
+              <PropertyRef Name="Property_ID" />
+            </Principal>
+            <Dependent Role="tblPropertyValue">
+              <PropertyRef Name="Property_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSubCategory_tblTechSpecFilter">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblTechSpecFilter" Type="Self.tblTechSpecFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblTechSpecFilter">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSubCategory_tblTypeFilter">
+          <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+          <End Role="tblTypeFilter" Type="Self.tblTypeFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="tblTypeFilter">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JooleEF" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+          <EntitySet Name="tblCities" EntityType="Self.tblCity" />
+          <EntitySet Name="tblCredentials" EntityType="Self.tblCredential" />
+          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+          <EntitySet Name="tblDocuments" EntityType="Self.tblDocument" />
+          <EntitySet Name="tblFeedBacks" EntityType="Self.tblFeedBack" />
+          <EntitySet Name="tblManufacturers" EntityType="Self.tblManufacturer" />
+          <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+          <EntitySet Name="tblProjects" EntityType="Self.tblProject" />
+          <EntitySet Name="tblProjToProds" EntityType="Self.tblProjToProd" />
+          <EntitySet Name="tblProperties" EntityType="Self.tblProperty" />
+          <EntitySet Name="tblPropertyValues" EntityType="Self.tblPropertyValue" />
+          <EntitySet Name="tblSales" EntityType="Self.tblSale" />
+          <EntitySet Name="tblStates" EntityType="Self.tblState" />
+          <EntitySet Name="tblSubCategories" EntityType="Self.tblSubCategory" />
+          <EntitySet Name="tblTechSpecFilters" EntityType="Self.tblTechSpecFilter" />
+          <EntitySet Name="tblTypeFilters" EntityType="Self.tblTypeFilter" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK_tblSubCategory_tblCategory" Association="Self.FK_tblSubCategory_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategories" />
+            <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCity_tblState" Association="Self.FK_tblCity_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="tblCity" EntitySet="tblCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblCity" Association="Self.FK_tblProject_tblCity">
+            <End Role="tblCity" EntitySet="tblCities" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblCredential" Association="Self.FK_tblUser_tblCredential">
+            <End Role="tblCredential" EntitySet="tblCredentials" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDepartment_tblManufacturer" Association="Self.FK_tblDepartment_tblManufacturer">
+            <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+            <End Role="tblDepartment" EntitySet="tblDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblDocument" Association="Self.FK_tblProduct_tblDocument">
+            <End Role="tblDocument" EntitySet="tblDocuments" />
+            <End Role="tblProduct" EntitySet="tblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFeedBack_tblProduct" Association="Self.FK_tblFeedBack_tblProduct">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblFeedBack" EntitySet="tblFeedBacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFeedBack_tblUser" Association="Self.FK_tblFeedBack_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblFeedBack" EntitySet="tblFeedBacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblManufacturer_tblUser" Association="Self.FK_tblManufacturer_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblManufacturer" Association="Self.FK_tblProduct_tblManufacturer">
+            <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+            <End Role="tblProduct" EntitySet="tblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProjToProd" Association="Self.FK_tblProduct_tblProjToProd">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblProjToProd" EntitySet="tblProjToProds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblPropertyValue" Association="Self.FK_tblProduct_tblPropertyValue">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblPropertyValue" EntitySet="tblPropertyValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblSales" Association="Self.FK_tblProduct_tblSales">
+            <End Role="tblSales" EntitySet="tblSales" />
+            <End Role="tblProduct" EntitySet="tblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblSubCategory" Association="Self.FK_tblProduct_tblSubCategory">
+            <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+            <End Role="tblProduct" EntitySet="tblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblProjToProd" Association="Self.FK_tblProject_tblProjToProd">
+            <End Role="tblProject" EntitySet="tblProjects" />
+            <End Role="tblProjToProd" EntitySet="tblProjToProds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblState" Association="Self.FK_tblProject_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblUser" Association="Self.FK_tblProject_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProperty_tblTechSpecFilter" Association="Self.FK_tblProperty_tblTechSpecFilter">
+            <End Role="tblProperty" EntitySet="tblProperties" />
+            <End Role="tblTechSpecFilter" EntitySet="tblTechSpecFilters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProperty_tblTypeFilter" Association="Self.FK_tblProperty_tblTypeFilter">
+            <End Role="tblProperty" EntitySet="tblProperties" />
+            <End Role="tblTypeFilter" EntitySet="tblTypeFilters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPropertyValue_tblProperty" Association="Self.FK_tblPropertyValue_tblProperty">
+            <End Role="tblProperty" EntitySet="tblProperties" />
+            <End Role="tblPropertyValue" EntitySet="tblPropertyValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSubCategory_tblTechSpecFilter" Association="Self.FK_tblSubCategory_tblTechSpecFilter">
+            <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+            <End Role="tblTechSpecFilter" EntitySet="tblTechSpecFilters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSubCategory_tblTypeFilter" Association="Self.FK_tblSubCategory_tblTypeFilter">
+            <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+            <End Role="tblTypeFilter" EntitySet="tblTypeFilters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="jooleModelStoreContainer" CdmEntityContainer="JooleEF">
+          <EntitySetMapping Name="tblCategories">
+            <EntityTypeMapping TypeName="jooleModel.tblCategory">
+              <MappingFragment StoreEntitySet="tblCategory">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCities">
+            <EntityTypeMapping TypeName="jooleModel.tblCity">
+              <MappingFragment StoreEntitySet="tblCity">
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="State_ID" ColumnName="State_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCredentials">
+            <EntityTypeMapping TypeName="jooleModel.tblCredential">
+              <MappingFragment StoreEntitySet="tblCredential">
+                <ScalarProperty Name="Credential_ID" ColumnName="Credential_ID" />
+                <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDepartments">
+            <EntityTypeMapping TypeName="jooleModel.tblDepartment">
+              <MappingFragment StoreEntitySet="tblDepartment">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Department_Phone" ColumnName="Department_Phone" />
+                <ScalarProperty Name="Department_Email" ColumnName="Department_Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDocuments">
+            <EntityTypeMapping TypeName="jooleModel.tblDocument">
+              <MappingFragment StoreEntitySet="tblDocument">
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Document_Folder_Path" ColumnName="Document_Folder_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFeedBacks">
+            <EntityTypeMapping TypeName="jooleModel.tblFeedBack">
+              <MappingFragment StoreEntitySet="tblFeedBack">
+                <ScalarProperty Name="FeedBack_ID" ColumnName="FeedBack_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Feedback_Time" ColumnName="Feedback_Time" />
+                <ScalarProperty Name="Feedback_Score" ColumnName="Feedback_Score" />
+                <ScalarProperty Name="Feedback_Content" ColumnName="Feedback_Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManufacturers">
+            <EntityTypeMapping TypeName="jooleModel.tblManufacturer">
+              <MappingFragment StoreEntitySet="tblManufacturer">
+                <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
+                <ScalarProperty Name="Manufacturer_Name" ColumnName="Manufacturer_Name" />
+                <ScalarProperty Name="Manufacturer_Department" ColumnName="Manufacturer_Department" />
+                <ScalarProperty Name="Manufacturer_Web" ColumnName="Manufacturer_Web" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProducts">
+            <EntityTypeMapping TypeName="jooleModel.tblProduct">
+              <MappingFragment StoreEntitySet="tblProduct">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Manufacturer_ID" ColumnName="Manufacturer_ID" />
+                <ScalarProperty Name="Sales_ID" ColumnName="Sales_ID" />
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Series" ColumnName="Series" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Model_Year" ColumnName="Model_Year" />
+                <ScalarProperty Name="Series_Info" ColumnName="Series_Info" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Featured" ColumnName="Featured" />
+                <ScalarProperty Name="Product_Image" ColumnName="Product_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjects">
+            <EntityTypeMapping TypeName="jooleModel.tblProject">
+              <MappingFragment StoreEntitySet="tblProject">
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Project_Address1" ColumnName="Project_Address1" />
+                <ScalarProperty Name="Project_Address2" ColumnName="Project_Address2" />
+                <ScalarProperty Name="Project_City" ColumnName="Project_City" />
+                <ScalarProperty Name="Project_State" ColumnName="Project_State" />
+                <ScalarProperty Name="Project_Size" ColumnName="Project_Size" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjToProds">
+            <EntityTypeMapping TypeName="jooleModel.tblProjToProd">
+              <MappingFragment StoreEntitySet="tblProjToProd">
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProperties">
+            <EntityTypeMapping TypeName="jooleModel.tblProperty">
+              <MappingFragment StoreEntitySet="tblProperty">
+                <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
+                <ScalarProperty Name="Property_Name" ColumnName="Property_Name" />
+                <ScalarProperty Name="IsType" ColumnName="IsType" />
+                <ScalarProperty Name="IsTechSpec" ColumnName="IsTechSpec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPropertyValues">
+            <EntityTypeMapping TypeName="jooleModel.tblPropertyValue">
+              <MappingFragment StoreEntitySet="tblPropertyValue">
+                <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSales">
+            <EntityTypeMapping TypeName="jooleModel.tblSale">
+              <MappingFragment StoreEntitySet="tblSales">
+                <ScalarProperty Name="Sales_ID" ColumnName="Sales_ID" />
+                <ScalarProperty Name="Sales_Name" ColumnName="Sales_Name" />
+                <ScalarProperty Name="Sales_Phone" ColumnName="Sales_Phone" />
+                <ScalarProperty Name="Sales_Email" ColumnName="Sales_Email" />
+                <ScalarProperty Name="Sales_Web" ColumnName="Sales_Web" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStates">
+            <EntityTypeMapping TypeName="jooleModel.tblState">
+              <MappingFragment StoreEntitySet="tblState">
+                <ScalarProperty Name="State_ID" ColumnName="State_ID" />
+                <ScalarProperty Name="State_Name" ColumnName="State_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSubCategories">
+            <EntityTypeMapping TypeName="jooleModel.tblSubCategory">
+              <MappingFragment StoreEntitySet="tblSubCategory">
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="SubCategory_Name" ColumnName="SubCategory_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTechSpecFilters">
+            <EntityTypeMapping TypeName="jooleModel.tblTechSpecFilter">
+              <MappingFragment StoreEntitySet="tblTechSpecFilter">
+                <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+                <ScalarProperty Name="Min_Value" ColumnName="Min_Value" />
+                <ScalarProperty Name="Max_Value" ColumnName="Max_Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTypeFilters">
+            <EntityTypeMapping TypeName="jooleModel.tblTypeFilter">
+              <MappingFragment StoreEntitySet="tblTypeFilter">
+                <ScalarProperty Name="Property_ID" ColumnName="Property_ID" />
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Type_Options" ColumnName="Type_Options" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="jooleModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Image" ColumnName="User_Image" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="Credential_ID" ColumnName="Credential_ID" />
+                <ScalarProperty Name="User_Image_SRC" ColumnName="User_Image_SRC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

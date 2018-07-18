@@ -1,0 +1,349 @@
+﻿@model JooleMVC.Models.ProductDetailVM
+@using JooleMVC.Models
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductSummary</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: grey;
+                    color: white;
+                }
+
+
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            #navbar a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                #navbar a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                #navbar a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+            .sticky + .content {
+                padding-top: 60px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        <div id="page_header" class="row" style="background: linear-gradient(to bottom, #7AB5EE 25%, #e9ecef 80%);height:65px;">
+            <div class="col" style="margin-top:10px;"><img src="~/Content/Images/joole_logo_color.png" width="125" height="50" /></div>
+
+            <div class="col-8 justify-content-center">
+                <form action="Search" method="post" class="col-12 text-center">
+                    <select id="select_Category" name="Category" class="form-control form-control-sm col-2" style="display:inline-block;margin-top:20px;" required>
+                        <option value="-1">Category</option>
+                    </select>
+                    <input id="txt_Search_Keyword" name="Search_Keyword" class="form-control form-control-sm col-5" style="display:inline-block;margin-top:20px;" type="text" placeholder="keyword" maxlength="50" />
+                    <input id="SubmitBtn" type="submit" value="Search" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </form>
+            </div>
+            <div class="col text-center">
+                <a href="SignUp" class="badge badge-pill badge-light text-muted" style="display:inline-block;margin-top:25px;">Project</a>
+                <img @*src="data:image;base64,@System.Convert.ToBase64String(User_Image)"*@ width="55" height="55" style="border-radius:50%;" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:0px;">
+            <ol class="breadcrumb small col-lg-12">
+                <li class="breadcrumb-item"><a href="#">Mechanical</a></li>
+                <li class="breadcrumb-item"><a href="#">HVAC Fans</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.data[3]</li>
+            </ol>
+        </div>
+        @*-----------------------------------------------------------------------*@
+        <div id="navbar" class="topnav">
+            <a href="#productSummary">Product Summary</a>
+            <a href="#productDetails">Details</a>
+            <a href="#productDocumentation">Documentation</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+
+        @*-----------------------------------------------------------------------*@
+        <div id="productSummary"><br /><br /><br /></div>
+        <div class="container">
+            <div class="row"><h2>Product Summary</h2></div>
+            <div class="row">
+                <div class="col">
+                    <div class="row"><h4>Product Description</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">Manufacturer</div>
+                            <div class="row">Series</div>
+                            <div class="row">Model</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">@Model.data[1]</div>
+                            <div class="row">@Model.data[2]</div>
+                            <div class="row">@Model.data[3]</div>
+                        </div>
+                    </div>
+                    <div class="row"><h4>Type</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">@Model.data[5]</div>
+                            <div class="row">@Model.data[8]</div>
+                            <div class="row">@Model.data[11]</div>
+                            <div class="row">@Model.data[14]</div>
+                            <div class="row">@Model.data[17]</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">@Model.data[6]</div>
+                            <div class="row">@Model.data[9]</div>
+                            <div class="row">@Model.data[12]</div>
+                            <div class="row">@Model.data[15]</div>
+                            <div class="row">@Model.data[18]</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row"><h4>Tech Specs</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">@Model.data[21]</div>
+                            <div class="row">@Model.data[24]</div>
+                            <div class="row">@Model.data[27]</div>
+                            <div class="row">@Model.data[30]</div>
+                            <div class="row">@Model.data[33]</div>
+                            <div class="row">@Model.data[36]</div>
+                            <div class="row">@Model.data[39]</div>
+                            <div class="row">@Model.data[42]</div>
+                            <div class="row">@Model.data[45]</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">@Model.data[22]</div>
+                            <div class="row">@Model.data[25]</div>
+                            <div class="row">@Model.data[28]</div>
+                            <div class="row">@Model.data[31]</div>
+                            <div class="row">@Model.data[34]</div>
+                            <div class="row">@Model.data[37]</div>
+                            <div class="row">@Model.data[40]</div>
+                            <div class="row">@Model.data[43]</div>
+                            <div class="row">@Model.data[46]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*-----------------------------------------------------------------------*@
+
+
+        @*-----------------------------------------------------------------------*@
+        <div id="productDetails"><br /><br /><br /></div>
+        <div class="container">
+            <div class="row"><h2>Product Details</h2></div>
+            <div class="row"><h4>Series Information</h4></div>
+            <div class="row">values</div>
+            <div class="row">values</div>
+            <div class="row">values</div>
+            <div class="row">values</div>
+            <div class="row">values</div>
+        </div>
+        @*-----------------------------------------------------------------------*@
+
+
+        @*-----------------------------------------------------------------------*@
+        <div id="productDocumentation"><br /><br /><br /></div>
+        <div class="container">
+            <div class="row"><h2>Product Documentation</h2></div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">values</div>
+                    <div class="row">values</div>
+                    <div class="row">values</div>
+                </div>
+                <div class="col">
+                    <div class="row">valuesContd</div>
+                    <div class="row">valuesContd</div>
+                    <div class="row">valuesContd</div>
+                </div>
+            </div>
+        </div>
+        @*-----------------------------------------------------------------------*@
+
+
+        @*-----------------------------------------------------------------------*@
+        <div id="contact"><br /><br /><br /></div>
+        <div class="container">
+            <div class="row"><h2>Contact</h2></div>
+            <div class="row">
+                <div class="col">
+                    <div class="row"><h4>Sales Representative</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">Name</div>
+                            <div class="row">Phone</div>
+                            <div class="row">Email</div>
+                            <div class="row">Web</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">@Model.data[57]</div>
+                            <div class="row">@Model.data[58]</div>
+                            <div class="row">@Model.data[59]</div>
+                            <div class="row">@Model.data[60]</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row"><h4>Manufacturer</h4></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">Department</div>
+                            <div class="row">Phone</div>
+                            <div class="row">Email</div>
+                            <div class="row">Web</div>
+                        </div>
+                        <div class="col">
+                            <div class="row">@Model.data[62]</div>
+                            <div class="row">@Model.data[63]</div>
+                            <div class="row">@Model.data[64]</div>
+                            <div class="row">@Model.data[65]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*-----------------------------------------------------------------------*@
+
+
+    @*-----------------------------------------------------------------------*@
+    <script>
+        window.onscroll = function () { myFunction() };
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+            var ProjectList;
+        $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:57022/WebAPI/GetCategoryList",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (data) {
+                        //var myJSON = JSON.stringify(data);
+                        //alert(myJSON);
+                        var OptionList = "";
+                        $('#select_Category').html('');
+                        $.each(data, function (i, item) {
+                            OptionList += "<option value='" + item.Category_ID + "'>" + item.Category_Name + "</option>";
+                        });
+                        $('#select_Category').append(OptionList);
+                    },
+                    failure: function (data) {
+                        alert("Failure");
+                        alert(data.responseText);
+                    },
+                    error: function (data) {
+                        alert("Error");
+                        alert(data.responseText);
+                    }
+                });
+        $("#select_Category").change(function () {
+            $("#txt_Search_Keyword").val("");
+        });
+        $("#txt_Search_Keyword").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: "http://localhost:57022/WebAPI/GetSubCateById",
+                    data: {
+                        CateID: $("#select_Category").val(),
+                        keyword: $("#txt_Search_Keyword").val()
+                    },
+                    //data: "{CateID:'" + $("#select_Category").val() + "', keyword: '" + $("#txt_Search_Keyword").val() + "'}",
+                    dataType: "json",
+                    async: true,
+                    success: function (data) {
+                        //var myJSON = JSON.stringify(data);
+                        //alert(myJSON);
+                        response(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            },
+            minLength: 1,
+            delay: 500
+        });
+    </script>
+
+</body>
+</html>
+

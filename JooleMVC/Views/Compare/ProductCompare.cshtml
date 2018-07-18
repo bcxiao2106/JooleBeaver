@@ -1,0 +1,370 @@
+﻿@model JooleMVC.Models.ProductDetailVM
+@using JooleMVC.Models
+@{
+    Layout = null;
+    var count = Model.ProductList.Count;
+    var User_Image = Model.User.User_Image_SRC;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductCompare</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .th {
+            background-color: #e9ecef;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0px;
+            border: 0px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background: linear-gradient(to bottom, #7AB5EE 8%, #ffffff 15%);*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        <div id="page_header" class="row" style="background: linear-gradient(to bottom, #7AB5EE 25%, #e9ecef 80%);height:65px;">
+            <div class="col-2" style="margin-top:10px;"><img src="~/Content/Images/joole_logo_color.png" width="125" height="50" /></div>
+
+            <div class="col-8">
+                <div class="col-12 text-center">
+                    <select id="select_Category" name="Category" class="form-control form-control-sm col-2" style="display:inline-block;margin-top:20px;" required>
+                        <option value="-1">Category</option>
+                    </select>
+                    <input id="txt_Search_Keyword" name="Search_Keyword" class="form-control form-control-sm col-5" style="display:inline-block;margin-top:20px;" type="text" placeholder="keyword" maxlength="50" />
+                    <input id="SubmitBtn" type="submit" value="Search" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </div>
+            </div>
+            <div class="col-2 text-center">
+                <a href="SignUp" class="badge badge-pill badge-light text-muted" style="display:inline-block;margin-top:25px;">Project</a>
+                <img id="BinaryImg" src="" width="55" height="55" style="border-radius:50%;" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:0px;">
+            <ol class="breadcrumb small col-lg-12">
+                <li class="breadcrumb-item"><a href="#">Mechanical</a></li>
+                <li class="breadcrumb-item"><a href="#">HVAC Fans</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Compare</li>
+            </ol>
+        </div>
+
+        <div class="row justify-content-center">
+            <table class="table-sm table-bordered table-hover col-12" style="font-size: 12px">
+                <tr>
+                    @{//row 2 Product image
+                        for (int i = 0; i < count; i++)
+                        {
+                            var Product_Image = Model.ProductList[i].Product_Image;
+                            if (i == 0)
+                            {
+                                <td scope="row" class="th">
+                                    Apperance
+                                </td>
+                            }
+                            <td align="center" style="background-color:white;">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(Product_Image)" width="200" height="150" />
+                            </td>
+                        }
+
+                    }
+                </tr>
+                <tr>
+                    @{//row 1 Add to dropdownlist
+                        for (int i = 0; i < count; i++)
+                        {
+                            var PID = Model.ProductList[i].Product_ID;
+                            if (i == 0)
+                            {
+                                <td scope="row" width="180px" class="th">
+                                    Operation
+                                </td>
+                            }
+                            <td width="250px" align="center">
+                                <select id="select_AddToProject_@PID" name="AddToProject_@PID" class="form-control form-control-sm" style="color:white;height:23px;background-color:#658BA8;border-radius: 4px;border: 1px solid grey;padding: 0px 0px;display:inline-block;font-size: 12px;">
+                                    <option value="-1" selected style="opacity: .5;">Add to</option>
+                                </select>
+                                <!--input id="btn_ViewInProject_@PID" type="button" value="View in project" class="form-control form-control-sm" style="color:white;background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 0px 0px;display:inline-block;height:20px;width:35%;font-size:12px;margin-top:0px;" /-->
+                            </td>
+                        }
+
+                    }
+                </tr>
+
+
+
+                <tr>
+                    <th colspan="@(count + 1)" style="background-color:#E0F0FC; border-bottom: 1px solid #658BA8;">DESCRIPTION</th>
+
+                </tr>
+
+                <tr>
+                    @{//row 3 Manufacture
+                        for (int i = 0; i < count; i++)
+                        {
+                            var Product_Name = Model.ProductList[i].Product_Name;
+                            if (i == 0)
+                            {
+                                <td scope="row" class="th">
+                                    Manufacture
+                                </td>
+                            }
+                            <td>
+                                @Product_Name
+                            </td>
+                        }
+                    }
+                </tr>
+
+                <tr>
+                    @{//row 4 Series
+                        for (int i = 0; i < count; i++)
+                        {
+                            var Series = Model.ProductList[i].Series;
+                            if (i == 0)
+                            {
+                                <td scope="row" class="th">
+                                    Series
+                                </td>
+                            }
+                            <td>
+                                @Series
+                            </td>
+                        }
+                    }
+                </tr>
+
+                <tr>
+                    @{//row 5 Model
+                        for (int i = 0; i < count; i++)
+                        {
+                            var Product_Model = Model.ProductList[i].Model;
+                            if (i == 0)
+                            {
+                                <td scope="row" class="th">
+                                    Model
+                                </td>
+                            }
+                            <td>
+                                @Product_Model
+                            </td>
+                        }
+                    }
+                </tr>
+
+                <tr>
+                    <th style="background-color:#E0F0FC; border-bottom: 1px solid #658BA8;" colspan="@(count + 1)">TYPE</th>
+                </tr>
+
+
+                @{//row 6 Type list
+                    List<ProductProperty> Product_Type = (Model.ProductList[0].PropertyList).FindAll(x => x.IsType == true);
+                    var TypeCount = Product_Type.Count;
+                    string htmlcode = "";
+                    for (int j = 0; j < TypeCount; j++)
+                    {
+                        htmlcode += "<tr>";
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                htmlcode += "<td  class='th'>" + Model.ProductList[i].PropertyList[j].Property_Name + "</td>";
+                            }
+                            htmlcode += "<td>" + Model.ProductList[i].PropertyList[j].Value + "</td>";
+                        }
+                        htmlcode += "</tr>";
+                    }
+
+                }
+                @Html.Raw(@htmlcode)
+
+
+                <tr>
+                    <th style="background-color:#E0F0FC; border-bottom: 1px solid #658BA8;" colspan="@(count + 1)">TECHNICAL SPECIFICATION</th>
+                </tr>
+
+
+                @{//row 7 Tech Spec List
+                    Product_Type = (Model.ProductList[0].PropertyList).FindAll(x => x.IsTechSpec == true);
+                    var TechSpecCount = Product_Type.Count + TypeCount;
+                    htmlcode = "";
+                    for (int j = TypeCount; j < TechSpecCount; j++)
+                    {
+                        htmlcode += "<tr>";
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                htmlcode += "<td  class='th'>" + Model.ProductList[i].PropertyList[j].Property_Name + "</td>";
+                            }
+                            htmlcode += "<td>" + Model.ProductList[i].PropertyList[j].Value + "</td>";
+                        }
+                        htmlcode += "</tr>";
+                    }
+
+                }
+                @Html.Raw(@htmlcode)
+
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var ProjectList;
+        $(document).ready(function () {
+            document.getElementById("SubmitBtn").onclick = function () {
+                if ($("#txt_Search_Keyword").val() == "HVAC Fans") {
+                    window.location = "http://localhost:56994/ProductList/GetProductListJson?SubCategory_ID=" + "1";
+                }
+                else { alert("No data of this subcategory"); }
+            };
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetCategoryList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    //var myJSON = JSON.stringify(data);
+                    //alert(myJSON);
+                    var OptionList = "";
+                    $('#select_Category').html('');
+                    $.each(data, function (i, item) {
+                        OptionList += "<option value='" + item.Category_ID + "'>" + item.Category_Name + "</option>";
+                    });
+                    $('#select_Category').append(OptionList);
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetProjectListByUserId?UserID=" + @Session["UserID"].ToString(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    //var myJSON = JSON.stringify(data);
+                    //alert(myJSON);
+                    var OptionList = "";
+                    $.each(data, function (i, item) {
+                        OptionList += "<option value='" + item.Project_ID + "'>" + item.Project_Name + "</option>";
+                    });
+                    $("select[id^='select_AddToProject_']").append(OptionList);
+                    ProjectList = OptionList
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+
+            $("select[id^='select_AddToProject_']").change(function (event) {
+                var selectControlId = event.target.id;
+                var productId = selectControlId.slice(selectControlId.lastIndexOf('_') + 1, selectControlId.length);
+                var projectId = $(("#" + selectControlId)).val();
+                var projectName = $(("#" + selectControlId + " option:selected")).text();
+                if (projectId != -1) {
+                    if (confirm("Add this product to: \n-" + projectName)) {
+                        $.ajax({
+                            type: "GET",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://localhost:57022/WebAPI/AddProdToProject",
+                            data: {
+                                ProjectId: projectId,
+                                ProductId: productId,
+                                Quantity: 1
+                            },
+                            dataType: "json",
+                            async: true,
+                            success: function (data) {
+                                //var myJSON = JSON.stringify(data);
+                                //alert(myJSON);
+                                response(data);
+                            },
+                            error: function (result) {
+                            }
+                        });
+                        //alert("Successfully added");
+                        $(("#" + selectControlId + " option:selected")).text(projectName + " ------ ADDED");
+                    }
+                    else
+                    {
+                        $(("#" + selectControlId)).val(-1);
+                    }
+
+                    //$(("#" + selectControlId)).val(-1);
+                }
+            });
+
+            $("#select_Category").change(function () {
+                $("#txt_Search_Keyword").val("");
+            });
+
+            $("#txt_Search_Keyword").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: "http://localhost:57022/WebAPI/GetSubCateById",
+                        data: {
+                            CateID: $("#select_Category").val(),
+                            keyword: $("#txt_Search_Keyword").val()
+                        },
+                        //data: "{CateID:'" + $("#select_Category").val() + "', keyword: '" + $("#txt_Search_Keyword").val() + "'}",
+                        dataType: "json",
+                        async: true,
+                        success: function (data) {
+                            //var myJSON = JSON.stringify(data);
+                            //alert(myJSON);
+                            response(data);
+                        },
+                        error: function (result) {
+                        }
+                    });
+                },
+                minLength: 1,
+                delay: 500
+            });
+
+            $.ajax({
+                url: "http://localhost:57022/WebAPI/GetUserImageByID?UserID="+@Session["UserID"].ToString(),
+                type: "GET",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var imageDataString = JSON.stringify(data);
+                    imageDataString = imageDataString.substring(1, imageDataString.length - 1);
+                    imageDataString = "data:image;base64," + imageDataString;
+                    $("#BinaryImg").attr("src", imageDataString);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

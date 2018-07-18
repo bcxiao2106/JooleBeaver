@@ -1,0 +1,243 @@
+﻿@model JooleMVC.Models.Project
+@{
+    ViewBag.Title = "CreatProject";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ProductCompare</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .th {
+            background-color: #e9ecef;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0px;
+            border: 0px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background: linear-gradient(to bottom, #7AB5EE 8%, #ffffff 15%);*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        <div id="page_header" class="row" style="background: linear-gradient(to bottom, #7AB5EE 25%, #e9ecef 80%);height:65px;">
+            <div class="col" style="margin-top:10px;"><img src="~/Content/Images/joole_logo_color.png" width="125" height="50" /></div>
+
+            <div class="col-8">
+                <div class="col-12 text-center">
+                    <select id="select_Category" name="Category" class="form-control form-control-sm col-2" style="display:inline-block;margin-top:20px;" required>
+                        <option value="-1">Category</option>
+                    </select>
+                    <input id="txt_Search_Keyword" name="Search_Keyword" class="form-control form-control-sm col-5" style="display:inline-block;margin-top:20px;" type="text" placeholder="keyword" maxlength="50" />
+                    <input id="SubmitBtn" type="submit" value="Search" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </div>
+            </div>
+
+            <div class="col text-center">
+                <a href="/Project/ListProjectAsync" class="badge badge-pill badge-light text-muted" style="display:inline-block;margin-top:25px;">Project</a>
+                <img id="BinaryImg" src="" width="55" height="55" style="border-radius:50%;" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:0px;">
+            <ol class="breadcrumb small col-lg-12">
+                <li class="breadcrumb-item"><a href="#">@Session["UserName"].ToString()</a></li>
+                <li class="breadcrumb-item"><a href="#">My Project</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New Project</li>
+            </ol>
+        </div>
+
+        <div class="row justify-content-sm-center" style="font-size:12px;margin-top:15px;">
+            <form action="CreateProject" method="post">
+                <div class="form-group">
+                    <label for="txt_Project_Name">Project Name</label>
+                    <input id="txt_Project_Name" name="Project_Name" class="form-control form-control-sm" type="text" placeholder="name your project" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_Project_Address1">Address</label>
+                    <input id="txt_Project_Address1" name="Project_Address1" class="form-control form-control-sm" type="text" placeholder="your address line 1" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_Project_Address2">Address 2</label>
+                    <input id="txt_Project_Address2" name="Project_Address2" class="form-control form-control-sm" type="text" placeholder="your address line 2 (optional)" />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="select_Project_City">City</label>
+                        <select id="select_Project_City" name="Project_City" class="form-control form-control-sm" required>
+                            <option value="-1">Select city</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="select_Project_State">State</label>
+                        <select id="select_Project_State" name="Project_State" class="form-control form-control-sm" required>
+                            <option value="-1">Select State</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_Project_Size">Project Size</label>
+                    <input id="txt_Project_Size" name="Project_Size" class="form-control form-control-sm" type="number" placeholder="the budget of your project in USD" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_Client_Name">Client Name</label>
+                    <input id="txt_Client_Name" name="Client_Name" class="form-control form-control-sm" type="text" placeholder="your client's name" required />
+                </div>
+                <input id="SaveAndContinue" type="submit" value="Save and continue" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 3px 3px;display:inline-block;height:28px;font-size:12px;" />
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $("#SubmitBtn").click(function () {
+                if ($("#txt_Search_Keyword").val() == "HVAC Fans") {
+                    window.location = "http://localhost:56994/ProductList/GetProductListJson?SubCategory_ID=" + "1";
+                }
+                else { alert("No data of this subcategory"); }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetStateList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var myJSON = JSON.stringify(data);
+                    var StateOptionList = "";
+                    $('#select_Project_State').html('<option value="-1">Please</option>');
+                    $.each(data, function (i, item) {
+                        StateOptionList += "<option value='" + item.State_ID + "'>" + item.State_Name + "</option>";
+                    });
+                    $('#select_Project_State').append(StateOptionList);
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetCityList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var myJSON = JSON.stringify(data);
+                    var StateOptionList = "";
+                    $('#select_Project_City').html('<option value="-1">Please</option>');
+                    $.each(data, function (i, item) {
+                        StateOptionList += "<option value='" + item.City_ID + "'>" + item.City_Name + "</option>";
+                    });
+                    $('#select_Project_City').append(StateOptionList);
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+
+            $.ajax({
+                url: "http://localhost:57022/WebAPI/GetUserImageByID?UserID=" + @Session["UserID"].ToString(),
+                type: "GET",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var imageDataString = JSON.stringify(data);
+                    imageDataString = imageDataString.substring(1, imageDataString.length - 1);
+                    imageDataString = "data:image;base64," + imageDataString;
+                    $("#BinaryImg").attr("src", imageDataString);
+                }
+            });
+
+            $("#select_Category").change(function () {
+                $("#txt_Search_Keyword").val("");
+            });
+
+            $("#txt_Search_Keyword").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: "http://localhost:57022/WebAPI/GetSubCateById",
+                        data: {
+                            CateID: $("#select_Category").val(),
+                            keyword: $("#txt_Search_Keyword").val()
+                        },
+                        //data: "{CateID:'" + $("#select_Category").val() + "', keyword: '" + $("#txt_Search_Keyword").val() + "'}",
+                        dataType: "json",
+                        async: true,
+                        success: function (data) {
+                            //var myJSON = JSON.stringify(data);
+                            //alert(myJSON);
+                            response(data);
+                        },
+                        error: function (result) {
+                        }
+                    });
+                },
+                minLength: 1,
+                delay: 500
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:57022/WebAPI/GetCategoryList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    //var myJSON = JSON.stringify(data);
+                    //alert(myJSON);
+                    var OptionList = "";
+                    $('#select_Category').html('');
+                    $.each(data, function (i, item) {
+                        OptionList += "<option value='" + item.Category_ID + "'>" + item.Category_Name + "</option>";
+                    });
+                    $('#select_Category').append(OptionList);
+                },
+                failure: function (data) {
+                    alert("Failure");
+                    alert(data.responseText);
+                },
+                error: function (data) {
+                    alert("Error");
+                    alert(data.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

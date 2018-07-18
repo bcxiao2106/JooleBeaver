@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="849d662da3d14c528c0e1787985d40d2" Name="Diagram1">
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblCategory" Width="1.5" PointX="6" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblCity" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblCredential" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblDepartment" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblDocument" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblFeedBack" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblManufacturer" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblProduct" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblProject" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblProjToProd" Width="1.5" PointX="12.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblProperty" Width="1.5" PointX="10.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblPropertyValue" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblSale" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblState" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblSubCategory" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblTechSpecFilter" Width="1.5" PointX="15" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblTypeFilter" Width="1.5" PointX="15" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Joole_MVC_ProjectModel.tblUser" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblSubCategory_tblCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblCity_tblState" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblUser_tblCredential" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblDepartment_tblManufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblDocument" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblFeedBack_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblFeedBack_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblManufacturer_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblManufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblProjToProd" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblPropertyValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblSales" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProduct_tblSubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProject_tblProjToProd" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProject_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProperty_tblTechSpecFilter" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblProperty_tblTypeFilter" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblPropertyValue_tblPropertyValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblSubCategory_tblTechSpecFilter" ManuallyRouted="false" />
+        <AssociationConnector Association="Joole_MVC_ProjectModel.FK_tblSubCategory_tblTypeFilter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

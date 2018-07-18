@@ -1,0 +1,316 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background: linear-gradient(to bottom, #7AB5EE 13%, #ffffff 65%);
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div style="margin:40px;"></div>
+    <div class="container body-content">
+        <div id="page_header" class="row justify-content-end">
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn" class="badge badge-pill badge-light text-muted">Sign Up</button>
+        </div>
+
+        <div id="logo_banner" class="row justify-content-center" style="margin-top:140px">
+            <img src="~/Content/Images/joole_logo_color.png" />
+        </div>
+
+        <div id="sub_title" class="row justify-content-center">
+            <P>&nbsp;</P>
+            <P>&nbsp;</P>
+            <p><h5 class="text-muted">Building Product Selection Platform</h5></p>
+            <P>&nbsp;</P>
+        </div>
+        <form action="valid" method="post">
+            <div class="row justify-content-center">
+                <div class="form-group col-4">
+                    <input id="txt_User_Name" name="User_Name" class="form-control form-control-sm col-12" type="text" placeholder="Username or Email" maxlength="50" required />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group col-4">
+                    <input id="txt_User_Password" name="User_Password" class="form-control form-control-sm col-12" type="password" placeholder="Password" maxlength="50" required />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group col-4 text-right">
+                    <input id="SubmitBtn" type="submit" value="Log in" class="btn btn-primary btn-sm" style="background-color: #658BA8;border-radius: 8px;border: 1px solid grey;padding: 1px 15px;" />
+                </div>
+            </div>
+            <br />
+            <div style="color:red;text-align:center">
+                @ViewData["Not Found!"]
+            </div>
+        </form>
+    </div>
+    <script></script>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content col-6">
+            <span><b>Register as User</b><span class="close">&times;</span></span>
+            <div>
+
+                <div style="display:table;margin-right:auto;margin-left:auto">
+                    <div id="picDiv" hidden>
+                        <img name="profilePic" id="profilePic" src="" style="border-radius:50%" />
+                    </div>
+                </div>
+                <div style="display:table;margin-right:auto;margin-left:auto" class="col-12">
+                    <form action="Submit" method="post" enctype="multipart/form-data" class="col-12">
+                        <table class="table table-sm col-12" style="font-size:12px;">
+                            <tr>
+                                <td width="130px;">Your Profile:</td>
+                                <td colspan="2"><input id="User_Image" name="User_Image" class="form-control form-control-sm" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="preview()" value="Choose your profile" required /></td>
+                            </tr>
+                            <tr>
+                                <td>User Name:</td>
+                                <td width="250px;"><input id="userName" name="User_Name" class="form-control form-control-sm" type="text" placeholder="User Name" required /></td>
+                                <td><div id="userNameValidation"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Email Address:  </td>
+                                <td><input id="emailAddress" name="User_Email" class="form-control form-control-sm" type="email" placeholder="Email Address" required /></td>
+                                <td><div id="userEmailValidation"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Password:  </td>
+                                <td><input id="password" name="User_Password" class="form-control form-control-sm" type="password" placeholder="Password" required /></td>
+                                <td><div id="userPasswordValidation"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Confirm Password:  </td>
+                                <td><input id="confirmPassword" name="confirmPassword" class="form-control form-control-sm" placeholder="Confirm Password" type="password" required /></td>
+                                <td><div id="userConfirmPasswordValidation"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Register as:</td>
+                                <td>
+                                    <select id="credential" name="Credential_ID" class="form-control form-control-sm">
+                                        <option value="2">Consumer</option>
+                                        <option value="3">Customer</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center"><input id="signUp" type="submit" value="Sign Up" class="btn btn-primary btn-sm" style="background-color: #658BA8;border-radius: 4px;border: 1px solid grey;padding: 1px 15px;" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#emailAddress').on('change', function ajValidateUserEmail() {
+                @*alert("Before userEmail AJAX call : " + $(this).val());*@
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:57022/WebAPI/validateUserEmail?emailID=" + $(this).val(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        var myJSON = JSON.stringify(data);
+                        @*alert(myJSON);*@
+                        @*$('#userEmailValidation').show();*@
+                        $('#userEmailValidation').text(myJSON);
+                        if (myJSON == '"Available"') {
+                            $('#userEmailValidation').css('color', 'green');
+                            $('#signUp').prop("disabled", false);
+                        }
+                        else {
+                            $('#userEmailValidation').css('color', 'red');
+                            $('#signUp').prop("disabled", true);
+                        }
+                    },
+                    failure: function (data) {
+                        alert("Failure");
+                        alert(data.responseText);
+                    },
+                    error: function (data) {
+                        alert("Error");
+                        alert(data.responseText);
+                    }
+                });
+            });
+
+            $('#userName').on('change', function ajValidateUserName() {
+                @* alert("Before userName AJAX call : " + $(this).val());*@
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:57022/WebAPI/validateUserName?userName=" + $(this).val(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        var myJSON = JSON.stringify(data);
+                        @* alert(myJSON);*@
+                        @*$('#userNameValidation').show();*@
+                        $('#userNameValidation').text(myJSON);
+                        if (myJSON == '"Available"') {
+                            $('#userNameValidation').css('color', 'green');
+                            $('#signUp').prop("disabled", false);
+                        }
+                        else {
+                            $('#userNameValidation').css('color', 'red');
+                            $('#signUp').prop("disabled", true);
+                        }
+                    },
+                    failure: function (data) {
+                        alert("Failure");
+                        alert(data.responseText);
+                    },
+                    error: function (data) {
+                        alert("Error");
+                        alert(data.responseText);
+                    }
+                });
+            });
+
+            $('#confirmPassword').on('change', function validatePassword()
+            {
+                if ($(this).val() != $('#password').val()) {
+                    @*alert("goes");*@
+                    @*$('#userPasswordValidation').show();*@
+                    $('#userPasswordValidation').text('Passwords do not match');
+                    $('#userPasswordValidation').css('color', 'red');
+                    $('#userConfirmPasswordValidation').show();
+                    $('#userConfirmPasswordValidation').text('Passwords do not match');
+                    $('#userConfirmPasswordValidation').css('color', 'red');
+                    $('#signUp').prop("disabled", true);
+                }
+                else
+                {
+                    @*$('#userPasswordValidation').show();*@
+                    $('#userPasswordValidation').text('Passwords match');
+                    $('#userPasswordValidation').css('color', 'green');
+                    $('#userConfirmPasswordValidation').show();
+                    $('#userConfirmPasswordValidation').text('Passwords match');
+                    $('#userConfirmPasswordValidation').css('color', 'green');
+                    $('#signUp').prop("disabled", false);
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function preview() {
+            var Readfile = new FileReader();
+            Readfile.readAsDataURL(document.getElementById("User_Image").files[0]);
+            Readfile.onload = function (ofREvent) {
+                document.getElementById("profilePic").src = ofREvent.target.result;
+                document.getElementById("profilePic").height = "120";
+                document.getElementById("profilePic").width = "120";
+                document.getElementById("picDiv").hidden = false;
+            };
+        };
+    </script>
+
+</body>
+</html>
+
+

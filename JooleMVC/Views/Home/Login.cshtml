@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page_header" class="row justify-content-end">
+    <a href="SignUp" class="badge badge-pill badge-light text-muted">Sign up</a>
+</div>
+
+<div id="logo_banner"class="row justify-content-center" style="margin-top:140px">
+    <img src="~/Content/Images/joole_logo_color.png" />
+</div>
+
+<div id="sub_title" class="row justify-content-center">
+    <P>&nbsp;</P>
+    <P>&nbsp;</P>
+    <p><h5 class="text-muted">Building Product Selection Platform</h5></p>
+    <P>&nbsp;</P>
+</div>
+
+<form action="Login" method="post">
+    <div class="row justify-content-center">
+        <div class="form-group col-4">
+            <input id="txt_User_Name" name="User_Name" class="form-control form-control-sm col-12" type="text" placeholder="Username or Email" maxlength="50" required />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group col-4">
+            <input id="txt_User_Password" name="User_Password" class="form-control form-control-sm col-12" type="password" placeholder="Password" maxlength="50" required />
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group col-4 text-right">
+            <input id="SubmitBtn" type="submit" value="Log in" class="btn btn-primary btn-sm" style="background-color: #658BA8;border-radius: 8px;border: 1px solid grey;padding: 1px 15px;" />
+        </div>
+    </div>
+</form>
+

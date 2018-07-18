@@ -1,0 +1,521 @@
+﻿@model JooleMVC.Models.ProductListVM
+@using JooleMVC.Models
+@{
+    Layout = null;
+    var count = Model.ProductList.Count;
+    var User_Image = Model.User.User_Image_SRC;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search Result</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        .th {
+            background-color: #e9ecef;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            margin-top: 0px;
+            padding: 0px;
+            border: 0px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background: linear-gradient(to bottom, #7AB5EE 8%, #ffffff 15%);*/
+        }
+
+        ol, ul, li {
+            list-style: none;
+        }
+
+        body {
+            color: #000000;
+            background: #FFF;
+        }
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #F00;
+            }
+
+        .lf {
+            float: left;
+        }
+
+        .rt {
+            float: right;
+        }
+
+        .pt5 {
+            padding-top: 5px;
+        }
+
+        .pb5 {
+            padding-bottom: 5px;
+        }
+
+        #header, #main, #footer {
+            margin: 0 auto;
+            width: 980px;
+            overflow: hidden
+        }
+
+        #main_left {
+            float: left;
+        }
+
+        #main_right {
+            float: right;
+        }
+
+        #Div0 {
+            float: left;
+            width: 100%;
+        }
+
+        #leftdiv {
+            float: left;
+            width: 22%;
+            padding-left: 10px;
+        }
+
+        .minmaxRange {
+            width: 100px;
+            border: 0;
+        }
+
+        #rightdiv {
+            float: right;
+            width: 76%;
+        }
+
+        .leftdivfilter {
+            border:1px solid;
+            border-color: #E6E7E7;
+        }
+
+        .ModelText {
+            width:50px;
+            height:20px;
+            border-radius:2px;
+            display: inline-block;
+            border:1px solid #E6E7E7;
+            font-weight: bold;
+        }
+
+        .filterSectionName {
+            font-size:12px;
+            background-color: lightgrey;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+        .productListCatSubCat {
+            display: inline-block;
+        }
+
+        ul.content {
+            padding-left: 0;
+            overflow: hidden
+        }
+
+            ul.content li {
+                float: left;
+            }
+
+        img {
+            position: relative;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        <div id="page_header" class="row" style="background: linear-gradient(to bottom, #7AB5EE 25%, #e9ecef 80%);height:65px;">
+            <div class="col-2" style="margin-top:10px;"><img src="~/Content/Images/joole_logo_color.png" width="125" height="50" /></div>
+
+            <div class="col-8">
+                <div class="col-12 text-center">
+                    <select id="select_Category" name="Category" class="form-control form-control-sm col-2" style="display:inline-block;margin-top:20px;" required>
+                        <option value="-1">Category</option>
+                    </select>
+                    <input id="txt_Search_Keyword" name="Search_Keyword" class="form-control form-control-sm col-5" style="display:inline-block;margin-top:20px;" type="text" placeholder="keyword" maxlength="50" />
+                    <input id="SubmitBtn" type="submit" value="Search" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid #E6E7E7;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </div>
+            </div>
+            <div class="col-2 text-center">
+                <a href="/Project/ListProjectAsync" class="badge badge-pill badge-light text-muted" style="display:inline-block;margin-top:25px;">Project</a>
+                <img id="BinaryImg" src="" width="55" height="55" style="border-radius:50%;" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:0px;">
+            <ol class="breadcrumb small col-lg-12">
+                <li class="breadcrumb-item"><a href="#">Mechanical</a></li>
+                <li class="breadcrumb-item"><a href="#">HVAC Fans</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Search</li>
+            </ol>
+        </div>
+
+        <div class="row" style="margin-top:0px;font-size:12px;">
+            <div class="col-3">
+                <div id="foldzone">
+                    <div class="leftdivfilter">
+                        <div style="text-align:center">
+                            <br />
+                            <p style="display:inline-block">Search:</p>
+                            <input id="" type="button" value="Save" style="display:inline-block" />
+                            <input id="" type="button" value="Clear" style="display:inline-block" /><br />
+                        </div>
+                        <div id="ProductType" class="filterSectionName">Product Type</div>
+                        <div id="ProductTypeSelector" style="text-align:center">
+                            <br />
+                            <input type="checkbox" id="commercial" value="Commercial">Commercial<br />
+                            <br />
+                        </div>
+                    </div>
+                    <div class="leftdivfilter" style="padding-top:3px">
+                        <div id="ModelYearSelector" style="text-align:center">
+                            <br />
+                            <p style="display:inline-block;text-align:left">Model year:</p>
+                            <input type="text" id="ModelYearLeft" class="ModelText" maxlength="4" size="4">
+                            -
+                            <input type="text" id="ModelYearRight" class="ModelText" maxlength="4" size="4">
+                        </div>
+                    </div>
+                    <div class="leftdivfilter">
+                        <div id="Technical_Specifications" class="filterSectionName">Technical Specifications</div>
+                        <div id="slidersfolder">
+                            <br />
+                            <div class="col-11">
+                                <label for="AirFlow">AirFlow(CFM)：</label>
+                                <input type="text" id="AirFlow" class="minmaxRange">
+                                <div id='TechSpec1'></div>
+                            </div><br />
+                            <div class="col-11">
+                                <label for="MaxPower">Max Power(W)：</label>
+                                <input type="text" id="MaxPower" class="minmaxRange">
+                                <div id='TechSpec2'></div>
+                            </div><br />
+                            <div class="col-11">
+                                <label for="Sound">Sound at max speed(dBA)(W)：</label>
+                                <input type="text" id="Sound" class="minmaxRange">
+                                <div id='TechSpec3'></div>
+                            </div><br />
+                            <div class="col-11">
+                                <label for="FanDiameter">Fan sweep diameter(in)(W)：</label>
+                                <input type="text" id="FanDiameter" class="minmaxRange">
+                                <div id='TechSpec4'></div>
+                            </div><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9 card-columns">
+                @{
+        for (int i = 0; i < count; i++)
+        {
+            var Image = Model.ProductList[i].Product_Image;
+            var Product_Name = Model.ProductList[i].Product_Name;
+            var Series = Model.ProductList[i].Series;
+            var _Model = Model.ProductList[i].Model;
+            var PID = Model.ProductList[i].Product_ID;
+
+            string CompareCheckboxID = "Compare" + (i + 1).ToString();
+            string Product_ID = (Model.ProductList[i].Product_ID).ToString();
+
+            List<ProductProperty> Product_Type = (Model.ProductList[0].PropertyList).FindAll(x => x.IsType == true);
+            var TypeCount = Product_Type.Count;
+            List<ProductProperty> Product_TypeSpec = (Model.ProductList[0].PropertyList).FindAll(x => x.IsTechSpec == true);
+            var TechSpecCount = Product_TypeSpec.Count + TypeCount;
+            <div class="card" style="width: 17rem;text-align:center; border:1px solid #E6E7E7;">
+                <div>
+                    <a href="/Compare/ProductSummary?inp=@PID"><img src="data:image;base64,@System.Convert.ToBase64String(@Image)" width="140" height="100"></a>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title" style="font-weight:bold">@Product_Name<br />@Series<br />@_Model</h6>
+                    @{
+            for (int j = TypeCount; j < TechSpecCount; j++)
+            {
+                @Model.ProductList[i].PropertyList[j].Value @Model.ProductList[i].PropertyList[j].Property_Name<br />
+}
+
+                    }
+                </div>
+                <div style="border-top:1px solid #E6E7E7;height:30px;padding-top:2px;">
+                    <input type="checkbox" class="Compare" id=@CompareCheckboxID value=@Product_ID>Compare
+                    <select id="select_AddToProject_@PID" name="AddToProject_@PID" class="form-control form-control-sm" style="width: 150px;color:white;height:23px;background-color:#658BA8;border-radius: 4px;border: 1px solid grey;padding: 0px 0px;display:inline-block;font-size: 12px;">
+                        <option value="-1" selected style="opacity: .5;">Add to</option>
+                    </select>
+                </div>
+            </div>
+}
+                }
+                <div class="col-3"></div>
+                <div class="col-9" style="text-align:right">
+                    <input id="btn_SubmitProductIDList" type="button" value="Compare!" class="btn btn-primary small" style="background-color: #658BA8;border-radius: 4px;border: 1px solid #E6E7E7;padding: 1px 1px;display:inline-block;height:28px;font-size:12px;" />
+                </div>
+            </div>
+                
+        </div>
+    </div>
+    <script type="text/javascript">
+            var ProjectList;
+            $(document).ready(function () {
+                $.ajax({
+                url: "http://localhost:57022/WebAPI/GetUserImageByID?UserID="+@Session["UserID"].ToString(),
+                type: "GET",
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    var imageDataString = JSON.stringify(data);
+                    imageDataString = imageDataString.substring(1, imageDataString.length - 1);
+                    imageDataString = "data:image;base64," + imageDataString;
+                    $("#BinaryImg").attr("src", imageDataString);
+                }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:57022/WebAPI/GetCategoryList",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (data) {
+                        //var myJSON = JSON.stringify(data);
+                        //alert(myJSON);
+                        var OptionList = "";
+                        $('#select_Category').html('');
+                        $.each(data, function (i, item) {
+                            OptionList += "<option value='" + item.Category_ID + "'>" + item.Category_Name + "</option>";
+                        });
+                        $('#select_Category').append(OptionList);
+                    },
+                    failure: function (data) {
+                        alert("Failure");
+                        alert(data.responseText);
+                    },
+                    error: function (data) {
+                        alert("Error");
+                        alert(data.responseText);
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:57022/WebAPI/GetProjectListByUserId?UserID=" + @Session["UserID"].ToString(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (data) {
+                        //var myJSON = JSON.stringify(data);
+                        //alert(myJSON);
+                        var OptionList = "";
+                        $.each(data, function (i, item) {
+                            OptionList += "<option value='" + item.Project_ID + "'>" + item.Project_Name + "</option>";
+                        });
+                        $("select[id^='select_AddToProject_']").append(OptionList);
+                        ProjectList = OptionList
+                    },
+                    failure: function (data) {
+                        alert("Failure");
+                        alert(data.responseText);
+                    },
+                    error: function (data) {
+                        alert("Error");
+                        alert(data.responseText);
+                    }
+                });
+
+                $("select[id^='select_AddToProject_']").change(function (event) {
+                    var selectControlId = event.target.id;
+                    var productId = selectControlId.slice(selectControlId.lastIndexOf('_') + 1, selectControlId.length);
+                    var projectId = $(("#" + selectControlId)).val();
+                    var projectName = $(("#" + selectControlId + " option:selected")).text();
+                    if (projectId != -1) {
+                        if (confirm("Add this product to: \n-" + projectName)) {
+                            $.ajax({
+                                type: "GET",
+                                contentType: "application/json; charset=utf-8",
+                                url: "http://localhost:57022/WebAPI/AddProdToProject",
+                                data: {
+                                    ProjectId: projectId,
+                                    ProductId: productId,
+                                    Quantity: 1
+                                },
+                                dataType: "json",
+                                async: true,
+                                success: function (data) {
+                                    //var myJSON = JSON.stringify(data);
+                                    //alert(myJSON);
+                                    response(data);
+                                },
+                                error: function (result) {
+                                }
+                            });
+                            //alert("Successfully added");
+                            $(("#" + selectControlId + " option:selected")).text(projectName + " ------ ADDED");
+                        }
+                        else {
+                            $(("#" + selectControlId)).val(-1);
+                        }
+
+                        //$(("#" + selectControlId)).val(-1);
+                    }
+                });
+                $("#select_Category").change(function () {
+                    $("#txt_Search_Keyword").val("");
+                });
+
+                $("#txt_Search_Keyword").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            type: "GET",
+                            contentType: "application/json; charset=utf-8",
+                            url: "http://localhost:57022/WebAPI/GetSubCateById",
+                            data: {
+                                CateID: $("#select_Category").val(),
+                                keyword: $("#txt_Search_Keyword").val()
+                            },
+                            //data: "{CateID:'" + $("#select_Category").val() + "', keyword: '" + $("#txt_Search_Keyword").val() + "'}",
+                            dataType: "json",
+                            async: true,
+                            success: function (data) {
+                                //var myJSON = JSON.stringify(data);
+                                //alert(myJSON);
+                                response(data);
+                            },
+                            error: function (result) {
+                            }
+                        });
+                    },
+                    minLength: 1,
+                    delay: 500
+                });
+            });
+
+        var ProductIDList = '';
+        $(document).ready(function () {
+            $('.Compare').click(function (event) {
+                var CheckboxID = event.target.id;
+                var Product_ID = $('#' + CheckboxID).val().toString();
+
+                if (this.checked) {
+
+                    ProductIDList = ProductIDList.concat(',', Product_ID);
+                } else {
+
+                    ProductIDList = ProductIDList.replace(',' + Product_ID, '');
+                }
+                return ProductIDList;
+            });
+
+            function CheckBoxCount() {
+                var checkboxlist = document.getElementsByClassName("Compare");
+                var numChecked = 0;
+                for (var i = 0; i < checkboxlist.length; i++) {
+                    if (checkboxlist[i].type == "checkbox" && checkboxlist[i].checked) {
+                        numChecked = numChecked + 1;
+                    }
+                }
+                if (numChecked < 2) {
+                    alert("Minimum 2 Products for comparision!");
+                    return false;
+                } else {
+                    //alert("Number of Selected Products: " + numChecked);
+                    return true;
+                }
+            }
+            document.getElementById("btn_SubmitProductIDList").onclick = function () {
+                if (CheckBoxCount()) {
+                    window.location = "http://localhost:56994/Compare/GetProductDetails?ProductIDList=" + ProductIDList.substring(1, ProductIDList.length);
+                };
+            };
+        });
+
+    </script>
+
+    @*slider subID  propertyID*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#TechSpec1").slider({
+                range: true,
+                min: 0,
+                max: 10000,
+                values: [750, 3000],
+                slide: function (event, ui) {
+                    $("#AirFlow").val(ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#AirFlow").val($("#TechSpec1").slider("values", 0) +
+                " - " + $("#TechSpec1").slider("values", 1));
+
+            $("#TechSpec2").slider({
+                range: true,
+                min: 0,
+                max: 10000,
+                values: [750, 3000],
+                slide: function (event, ui) {
+                    $("#MaxPower").val(ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#MaxPower").val($("#TechSpec2").slider("values", 0) +
+                " - " + $("#TechSpec2").slider("values", 1));
+
+            $("#TechSpec3").slider({
+                range: true,
+                min: 0,
+                max: 10000,
+                values: [750, 3000],
+                slide: function (event, ui) {
+                    $("#Sound").val(ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#Sound").val($("#TechSpec3").slider("values", 0) +
+                " - " + $("#TechSpec3").slider("values", 1));
+
+            $("#TechSpec4").slider({
+                range: true,
+                min: 0,
+                max: 10000,
+                values: [750, 3000],
+                slide: function (event, ui) {
+                    $("#FanDiameter").val(ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#FanDiameter").val($("#TechSpec4").slider("values", 0) +
+                " - " + $("#TechSpec4").slider("values", 1));
+        });
+    </script>
+
+    @*fold/unfold function*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProductType").click(function () {
+                $("#ProductTypeSelector").slideToggle("fast");
+            });
+            $("#Technical_Specifications").click(function () {
+                $("#slidersfolder").slideToggle("fast");
+            });
+        });
+    </script>
+</body>
+</html>
